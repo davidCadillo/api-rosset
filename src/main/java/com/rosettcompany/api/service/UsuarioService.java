@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rosettcompany.api.entity.RossetRequestEmail;
 import com.rosettcompany.api.entity.Usuario;
 import com.rosettcompany.api.repository.UsuarioRepository;
 
@@ -39,7 +40,7 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public Integer login(Usuario usuario) {
+	public Integer login(RossetRequestEmail usuario) {
 		return repository.validar_correo_y_pass(usuario.getEmail(), usuario.getContrasena());
 	}
 

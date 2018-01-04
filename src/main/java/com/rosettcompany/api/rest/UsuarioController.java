@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rosettcompany.api.entity.RossetRequestEmail;
 import com.rosettcompany.api.entity.Usuario;
 import com.rosettcompany.api.error.classes.ResponseDetail;
 import com.rosettcompany.api.error.constant.CodeDeveloper;
@@ -29,7 +30,7 @@ public class UsuarioController {
 	
 	@GetMapping
 	public ResponseEntity<?> saludar() {
-		return new ResponseEntity<>("hola", HttpStatus.OK);
+		return new ResponseEntity<>("API de Rosett Company", HttpStatus.OK);
 	}
 	
 	@GetMapping("/usuarios")
@@ -46,7 +47,7 @@ public class UsuarioController {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 	}
 
-	@PostMapping(value = { "/usuarios", "/register" ,"/loginfb"})
+	@PostMapping(value = { "/usuarios", "/register","loginfb"})
 	public ResponseEntity<?> create(@RequestBody Usuario usuario) {
 		int result = service.save(usuario);
 		if (result == -1) {
@@ -58,13 +59,13 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody Usuario usuario) {
+	public ResponseEntity<?> login(@RequestBody RossetRequestEmail request) {
 
-		int result = service.login(usuario);
+		int result = service.login(request);
 		if (result != 1) {
 			if (result == 0) {
 				throw new ResourceNotFoundException(
-						"No existe una cuenta asociada al email " + usuario.getEmail() + ".",
+						"No existe una cuenta asociada al email " + request.getEmail() + ".",
 						CodeDeveloper.USER_NOT_REGISTERED);
 			} else if (result == -1) {
 				throw new ResourceNotFoundException("Password incorrecto.", CodeDeveloper.PASSWORD_INCORRECT);
@@ -74,7 +75,7 @@ public class UsuarioController {
 
 		}
 		
-		return ResponseDetail.OK("Credenciales correctas.", service.findUserByEmail(usuario.getEmail()));
+		return ResponseDetail.OK("Credenciales correctas.", service.findUserByEmail(request.getEmail()));
 	}
 
 }

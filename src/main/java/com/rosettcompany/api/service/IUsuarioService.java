@@ -2,6 +2,7 @@ package com.rosettcompany.api.service;
 
 import java.util.List;
 
+import com.rosettcompany.api.entity.RossetRequestEmail;
 import com.rosettcompany.api.entity.Usuario;
 
 public interface IUsuarioService {
@@ -9,7 +10,7 @@ public interface IUsuarioService {
 	public List<Usuario> findAll();
 	public Integer save(Usuario usuario);
 	
-	public Integer login(Usuario usuario);
+	public Integer login(RossetRequestEmail usuario);
 	
 	public Usuario findById(long id);
 	
