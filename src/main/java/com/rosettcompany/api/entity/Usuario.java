@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -35,6 +37,7 @@ public class Usuario {
 
 	private String email = "";
 
+	@JsonIgnore
 	private String url_redsocial = "";
 
 	private String nombres = "";
@@ -43,6 +46,7 @@ public class Usuario {
 
 	private String sexo = "";
 
+	@JsonIgnore
 	private String contrasena = "";
 
 	private String fec_nacimiento = "";
