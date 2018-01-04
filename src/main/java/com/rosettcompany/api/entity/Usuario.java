@@ -37,7 +37,6 @@ public class Usuario {
 
 	private String email = "";
 
-	@JsonIgnore
 	private String url_redsocial = "";
 
 	private String nombres = "";
@@ -46,7 +45,6 @@ public class Usuario {
 
 	private String sexo = "";
 
-	@JsonIgnore
 	private String contrasena = "";
 
 	private String fec_nacimiento = "";

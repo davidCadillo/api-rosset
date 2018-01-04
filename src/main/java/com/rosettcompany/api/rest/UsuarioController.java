@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rosettcompany.api.entity.RossetRequestEmail;
 import com.rosettcompany.api.entity.Usuario;
+import com.rosettcompany.api.entity.UsuarioResponse;
 import com.rosettcompany.api.error.classes.ResponseDetail;
 import com.rosettcompany.api.error.constant.CodeDeveloper;
 import com.rosettcompany.api.error.exceptions.ResourceNotFoundException;
@@ -34,8 +35,8 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/usuarios")
-	public ResponseEntity<List<Usuario>> getUsuarios() {
-		List<Usuario> usuarios = service.findAll();
+	public ResponseEntity<List<UsuarioResponse>> getUsuarios() {
+		List<UsuarioResponse> usuarios = service.findAll();
 		if (usuarios.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
@@ -43,7 +44,8 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/usuarios/{id}")
-	public ResponseEntity<Usuario> getUsuarioById(@PathVariable long id) {
+	public ResponseEntity<?> getUsuarioById(@PathVariable long id) {
+		
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 	}
 

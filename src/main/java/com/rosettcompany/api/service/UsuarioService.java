@@ -1,6 +1,7 @@
 package com.rosettcompany.api.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.rosettcompany.api.entity.RossetRequestEmail;
 import com.rosettcompany.api.entity.Usuario;
+import com.rosettcompany.api.entity.UsuarioResponse;
 import com.rosettcompany.api.repository.UsuarioRepository;
 
 @Service
@@ -17,8 +19,15 @@ public class UsuarioService implements IUsuarioService {
 	private UsuarioRepository repository;
 
 	@Override
-	public List<Usuario> findAll() {
-		return repository.findAll();
+	public List<UsuarioResponse> findAll() {
+		
+		List<UsuarioResponse> usuariosResponse = new ArrayList<UsuarioResponse>();
+		List<Usuario> usuariosRaw = repository.findAll();
+		for(Usuario u: usuariosRaw) {
+			usuariosResponse.add(new UsuarioResponse(u));
+		}
+		
+		return usuariosResponse;
 	}
 
 	@Override
@@ -30,13 +39,13 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public Usuario findById(long id) {
-		return repository.findOne(id);
+	public UsuarioResponse findById(long id) {
+		return new UsuarioResponse(repository.findOne(id));
 	}
 
 	@Override
-	public Usuario findUserByEmail(String email) {
-		return repository.findByEmail(email);
+	public UsuarioResponse findUserByEmail(String email) {
+		return new UsuarioResponse(repository.findByEmail(email));
 	}
 
 	@Override
