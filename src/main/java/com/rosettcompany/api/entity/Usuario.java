@@ -51,6 +51,7 @@ public class Usuario {
 
 	private String cod_ubigeo = "";
 
+	@JsonIgnore
 	private Date fec_registro;
 
 	private String nom_colegio = "";
